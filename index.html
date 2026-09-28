@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Una sorpresa para ti! ✉️</title>
+    <style>
+        body {
+            background-color: #FFF0F5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #555555;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        /* Contenedor principal del sobre */
+        .envelope-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Cuerpo del sobre */
+        .envelope {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background-color: #EED5D2;
+            border: 2px solid #CD853F;
+            border-radius: 0 0 10px 10px;
+            z-index: 2;
+        }
+
+        /* Solapa superior del sobre */
+        .flap {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #D8BFD8;
+            transform-origin: top;
+            transition: transform 0.6s ease, z-index 0.3s;
+            z-index: 4;
+        }
+
+        /* Bolsillo interior (triángulo inferior frontal) */
+        .pocket {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid #E3CBC9;
+            z-index: 3;
+        }
+
+        /* Carta / Flor oculta dentro del sobre */
+        .card {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            width: 260px;
+            height: 160px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s ease;
+            z-index: 1;
+        }
+
+        /* Animación cuando se abre el sobre */
+        .open .flap {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .open .card {
+            transform: translateY(-110px);
+            z-index: 3;
+        }
+
+        /* Estilos de la flor amarilla y mensaje */
+        .flower {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            animation: bounce 1.5s infinite alternate;
+        }
+
+        .message {
+            color: #B8860B;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        /* Botón interactivo */
+        .btn {
+            margin-top: 30px;
+            background-color: #FFB6C1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+            z-index: 5;
+        }
+
+        .btn:hover {
+            background-color: #FF69B4;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="titulo">✉️ Haz clic en el sobre para abrirlo</h1>
+
+    <!-- Contenedor del Sobre -->
+    <div class="envelope-container" id="envelopeBox" onclick="abrirSobre()">
+        <div class="flap"></div>
+        <div class="pocket"></div>
+        <div class="envelope"></div>
+        
+        <!-- Contenido que sale -->
+        <div class="card" id="card">
+            <div class="flower">🌻</div>
+            <div class="message">¡Feliz Día!</div>
+        </div>
+    </div>
+
+    <button class="btn" id="btnAccion" onclick="abrirSobre()">Abrir Sobre</button>
+
+    <script>
+        function abrirSobre() {
+            const container = document.getElementById('envelopeBox');
+            const titulo = document.getElementById('titulo');
+            const btn = document.getElementById('btnAccion');
+
+            // Añade la clase CSS que activa las animaciones de apertura
+            container.classList.add('open');
+            
+            // Cambiar textos
+            titulo.innerText = "🌼 ¡Sorpresa Especial! 🌼";
+            btn.innerText = "¡Abierto con éxito!";
+            btn.disabled = true;
+            btn.style.backgroundColor = "#D3D3D3";
+            btn.style.cursor = "default";
+        }
+    </script>
+
+</body>
+</html>
